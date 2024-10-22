@@ -35,8 +35,12 @@ if __name__ == "__main__":
     while i < len(sys.argv):
         if sys.argv[i] == "-d":
             d_flag = True
-            directory = os.path.join(*sys.argv[i + 1:])
-            i += len(sys.argv[i + 1:])
+            i += 1
+            dir_parts = []
+            while i < len(sys.argv) and not sys.argv[i].startswith("-"):
+                dir_parts.append(sys.argv[i])
+                i += 1
+            directory = os.path.join(*dir_parts)
         elif sys.argv[i] == "-f":
             f_flag = True
             filename = sys.argv[i + 1]
