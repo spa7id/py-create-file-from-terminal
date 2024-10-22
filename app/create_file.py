@@ -31,15 +31,18 @@ if __name__ == "__main__":
     d_flag = False
     f_flag = False
 
-    for i in range(1, len(sys.argv)):
+    i = 1
+    while i < len(sys.argv):
         if sys.argv[i] == "-d":
             d_flag = True
             directory = os.path.join(*sys.argv[i + 1:])
-            break
+            i += len(sys.argv[i + 1:])
         elif sys.argv[i] == "-f":
             f_flag = True
             filename = sys.argv[i + 1]
-            break
+            i += 2
+        else:
+            i += 1
 
     if d_flag and not f_flag:
         create_directory(directory)
